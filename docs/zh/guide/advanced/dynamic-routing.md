@@ -77,14 +77,7 @@ router.beforeEach(to => {
 
 ## 添加嵌套路由
 
-要将嵌套路由添加到现有的路由中，可以将路由的 _name_ 作为第一个参数传递给 `router.addRoute()`，这将有效地添加路由，就像通过 `children` 添加的一样：
-
-```js
-router.addRoute({ name: 'admin', path: '/admin', component: Admin })
-router.addRoute('admin', { path: 'settings', component: AdminSettings })
-```
-
-这等效于：
+添加嵌套路由需要与父级路由一起添加，如下所示：
 
 ```js
 router.addRoute({
@@ -94,6 +87,15 @@ router.addRoute({
   children: [{ path: 'settings', component: AdminSettings }],
 })
 ```
+
+当前版本不支持以下用法，addRoute会把route添加至root。
+```js
+router.addRoute({ name: 'admin', path: '/admin', component: Admin })
+router.addRoute('admin', { path: 'settings', component: AdminSettings })
+```
+
+这等效于：
+
 
 ## 查看现有路由
 
